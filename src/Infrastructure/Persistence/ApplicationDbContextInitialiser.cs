@@ -3,6 +3,7 @@ using UserManager.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using UserManager.Infrastructure.Services;
 
 namespace UserManager.Infrastructure.Persistence;
 
@@ -74,17 +75,25 @@ public class ApplicationDbContextInitialiser
 
         // Default data
         // Seed, if necessary
-        if (!_context.TodoLists.Any())
+        if (!_context.Users.Any())
         {
-            _context.TodoLists.Add(new TodoList
-            {
-                Title = "Todo List",
-                Items =
+            _context.Users.AddRange(new List<User>() {
+                new User()
                 {
-                    new TodoItem { Title = "Make a todo list 📃" },
-                    new TodoItem { Title = "Check off the first item ✅" },
-                    new TodoItem { Title = "Realise you've already done two things on the list! 🤯"},
-                    new TodoItem { Title = "Reward yourself with a nice, long nap 🏆" },
+                    Id = Guid.NewGuid(),
+                    FirstName = "John",
+                    LastName = "Doe",
+                    DateOfBirth = DateTime.Now
+
+                },
+
+                new User()
+                {
+                    Id = Guid.NewGuid(),
+                    FirstName = "Max",
+                    LastName = "Mustermann",
+                    DateOfBirth = DateTime.Now
+
                 }
             });
 
