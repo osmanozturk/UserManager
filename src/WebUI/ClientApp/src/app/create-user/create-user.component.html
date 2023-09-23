@@ -1,4 +1,4 @@
-<form #userCreationForm = "ngForm" (ngSubmit) = "createUser(userCreationForm.value)">
+<form #userCreateForm = "ngForm" (ngSubmit) = "createUser(userCreateForm.value)">
     <div class="mb-3">
       <label for="firstNameInput" class="form-label">First Name</label>
       <input type="text" maxlength="50" class="form-control" name="firstName" id="firstNameInput" aria-describedby="firstNameHelp" ngModel>
@@ -13,5 +13,7 @@
         <div id="dateOfBirthHelp" class="form-text">We'll never share your date of birth with anyone else.</div>
       </div>
 
-    <button type="submit" class="btn btn-primary">Create User</button>
+      <div class="text-end">
+        <button type="submit" class="btn btn-primary">Create User</button>
+      </div>
   </form>

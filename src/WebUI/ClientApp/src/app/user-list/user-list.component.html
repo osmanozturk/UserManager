@@ -6,7 +6,7 @@
 
 <div class="container">
   <div class="row text-end">
-    <div class="col">
+    <div class="col " >
       <button type="button" class="btn btn-primary">
         <a class="navbar-brand" [routerLink]="['/create-user']">New User</a>
       </button>
@@ -27,6 +27,11 @@
             <td>{{ user.firstName }}</td>
             <td>{{ user.lastName }}</td>
             <td>{{ user.dateOfBirth }}</td>
+            <td class="text-end">
+              <button type="button" class="btn btn-primary" (click)="goToUser(user.id)">
+                Manage
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>

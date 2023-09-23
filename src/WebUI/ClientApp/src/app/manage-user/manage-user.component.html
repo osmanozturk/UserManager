@@ -1,0 +1,20 @@
+
+<form #userUpdateForm = "ngForm" (ngSubmit) = "updateUser(userUpdateForm.value)" *ngIf="user">
+    <div class="mb-3">
+      <label for="firstNameInput" class="form-label">First Name</label>
+      <input type="text" maxlength="50" class="form-control" name="firstName" id="firstNameInput" aria-describedby="firstNameHelp" [(ngModel)]="user.firstName">
+    </div>
+    <div class="mb-3">
+        <label for="lastNameInput" class="form-label">Last Name</label>
+        <input type="text" maxlength="50" class="form-control" name="lastName" id="lastNameInput" aria-describedby="lastNameHelp" [(ngModel)]="user.lastName">
+      </div>
+      <div class="mb-3">
+        <label for="dateOfBirthInput" class="form-label">Date of Birth</label>
+        <input id="dateOfBirthInput" name="dateOfBirth" type="date" class="form-control" aria-describedby="dateOfBirthHelp" [(ngModel)]="formattedDateOfBirth">
+        <div id="dateOfBirthHelp" class="form-text">We'll never share your date of birth with anyone else.</div>
+      </div>
+  
+      <div class="text-end">
+        <button type="submit" class="btn btn-primary">Update User</button>
+      </div>
+  </form>
