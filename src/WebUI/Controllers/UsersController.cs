@@ -9,6 +9,7 @@ using UserManager.Application.Users.Queries;
 
 namespace UserManager.WebUI.Controllers;
 
+[Authorize]
 public class UsersController : ApiControllerBase
 {
     [HttpGet("{id}")]
@@ -31,6 +32,25 @@ public class UsersController : ApiControllerBase
 
     }
 
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesDefaultResponseType]
+    public async Task<ActionResult<UserDto>> GetAllUsers()
+    {
+        var query = new GetAllUsersQuery();
+
+        var response = await Mediator.Send(query);
+
+        if (response != null)
+        {
+            return Ok(response);
+        }
+
+        return NotFound();
+
+    }
 
     [HttpPost]
     public async Task<ActionResult<Guid>> CreateUser(CreateUserCommand command)

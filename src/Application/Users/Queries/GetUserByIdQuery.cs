@@ -12,9 +12,9 @@ public record GetUserByIdQuery : IRequest<UserDto?>
     public Guid Id { get; set; }
 }
 
-public class GetUserByIdValidator : AbstractValidator<GetUserByIdQuery>
+public class GetUserByIdQueryValidator : AbstractValidator<GetUserByIdQuery>
 {
-    public GetUserByIdValidator()
+    public GetUserByIdQueryValidator()
     {
         RuleFor(x => x.Id)
             .NotEmpty().WithMessage("Id of the user is required");
