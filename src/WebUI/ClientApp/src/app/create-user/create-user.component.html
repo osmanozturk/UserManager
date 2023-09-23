@@ -1,0 +1,17 @@
+<form #userCreationForm = "ngForm" (ngSubmit) = "createUser(userCreationForm.value)">
+    <div class="mb-3">
+      <label for="firstNameInput" class="form-label">First Name</label>
+      <input type="text" maxlength="50" class="form-control" name="firstName" id="firstNameInput" aria-describedby="firstNameHelp" ngModel>
+    </div>
+    <div class="mb-3">
+        <label for="lastNameInput" class="form-label">Last Name</label>
+        <input type="text" maxlength="50" class="form-control" name="lastName" id="lastNameInput" aria-describedby="lastNameHelp" ngModel>
+      </div>
+      <div class="mb-3">
+        <label for="dateOfBirthInput" class="form-label">Date of Birth</label>
+        <input id="dateOfBirthInput" name="dateOfBirth" type="date" class="form-control" aria-describedby="dateOfBirthHelp" ngModel>
+        <div id="dateOfBirthHelp" class="form-text">We'll never share your date of birth with anyone else.</div>
+      </div>
+
+    <button type="submit" class="btn btn-primary">Create User</button>
+  </form>
