@@ -1,16 +1,42 @@
-<form #userCreateForm = "ngForm" (ngSubmit) = "createUser(userCreateForm.value)">
+<form #userCreateForm = "ngForm" (ngSubmit) = "createUser(userCreateForm.value, userCreateForm.form.valid)">
     <div class="mb-3">
       <label for="firstNameInput" class="form-label">First Name</label>
-      <input type="text" maxlength="50" class="form-control" name="firstName" id="firstNameInput" aria-describedby="firstNameHelp" ngModel>
+      <input type="text" required maxlength="50" class="form-control" name="firstName" id="firstNameInput" aria-describedby="firstNameHelp" ngModel #firstNameField="ngModel">
+
+      <div *ngIf="firstNameField.invalid && (firstNameField.dirty || firstNameField.touched || invalidSubmission)"
+      class="alert">
+        <div *ngIf="firstNameField.errors?.['required']" class="text-danger">
+          First name is required.
+        </div>
+        <div *ngIf="firstNameField.errors?.['maxlength']" class="text-danger">
+          First Name cannot be longer than 50 characters
+        </div>
+      </div>
     </div>
     <div class="mb-3">
         <label for="lastNameInput" class="form-label">Last Name</label>
-        <input type="text" maxlength="50" class="form-control" name="lastName" id="lastNameInput" aria-describedby="lastNameHelp" ngModel>
-      </div>
+        <input type="text" required maxlength="50" class="form-control" name="lastName" id="lastNameInput" aria-describedby="lastNameHelp" ngModel #lastNameField="ngModel">
+
+        <div *ngIf="lastNameField.invalid && (lastNameField.dirty || lastNameField.touched || invalidSubmission)"
+          class="alert">
+            <div *ngIf="lastNameField.errors?.['required']" class="text-danger">
+              Last name is required.
+            </div>
+            <div *ngIf="lastNameField.errors?.['maxlength']" class="text-danger">
+              Last Name cannot be longer than 50 characters
+            </div>
+          </div>
+    </div>
       <div class="mb-3">
         <label for="dateOfBirthInput" class="form-label">Date of Birth</label>
-        <input id="dateOfBirthInput" name="dateOfBirth" type="date" class="form-control" aria-describedby="dateOfBirthHelp" ngModel>
+        <input id="dateOfBirthInput" required name="dateOfBirth" type="date" class="form-control" aria-describedby="dateOfBirthHelp" ngModel #dateOfBirthField="ngModel">
         <div id="dateOfBirthHelp" class="form-text">We'll never share your date of birth with anyone else.</div>
+        
+        <div *ngIf="dateOfBirthField.invalid && (dateOfBirthField.dirty || dateOfBirthField.touched || invalidSubmission)" class="alert">
+            <div *ngIf="dateOfBirthField.errors?.['required']" class="text-danger">
+              Date of birth is required.
+            </div>
+          </div>
       </div>
 
       <div class="text-end">

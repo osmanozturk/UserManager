@@ -1,28 +1,36 @@
 import { Component } from '@angular/core';
 import { UsersClient, UserDto } from '../web-api-client';
 import { FormsModule } from '@angular/forms';
+import { Location, CommonModule } from '@angular/common';
 
 
 
 @Component({
   selector: 'app-create-user',
   templateUrl: './create-user.component.html',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   standalone: true
 })
 
 export class CreateUserComponent {
+  public invalidSubmission: boolean
+  constructor(private client: UsersClient, private location: Location) {
+    this.invalidSubmission = false
+  }
 
-  constructor(private client: UsersClient) {}
-
-  createUser(input: UserDto): string {
+  createUser(input: UserDto, isFormValid: boolean): string {
     let response = ""
-    this.client.createUser(input).subscribe(result => {
-      console.log('response is ', response)
-      console.log('input is ', input)
-      response = result
-    }, error => console.error(error)
-    );
-    return response
+    if (isFormValid) {
+      this.client.createUser(input).subscribe(result => {
+        response = result
+        this.location.back()
+      }, error => console.error(error));
+      return response
+    }
+
+    else {
+      this.invalidSubmission = true
+      return response;
+    }
   }
 }

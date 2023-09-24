@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { UsersClient, UserDto } from '../web-api-client';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { CommonModule, Location } from '@angular/common';
 
 
 
@@ -18,8 +18,8 @@ export class ManageUserComponent {
   public formattedDateOfBirth: string
   public userId: string
 
-  constructor(private client: UsersClient, private router: Router) {
-    this.userId = this.router.parseUrl(this.router.url).queryParams.userId
+  constructor(private client: UsersClient, private route: ActivatedRoute, private location: Location) {
+    this.userId = this.route.snapshot.queryParamMap.get('userId');
     this.client.getUserById(this.userId).subscribe(result => {
       this.user = result;
       this.formattedDateOfBirth = this.formatDate(this.user.dateOfBirth)
@@ -37,7 +37,13 @@ export class ManageUserComponent {
   updateUser(input: UserDto) {
     input.id = this.userId;
     this.client.updateUser(this.userId, input).subscribe(result => {
-    }, error => console.error(error)
-    );
+      this.location.back()
+    }, error => console.error(error));
+  }
+
+  deleteUser() {
+    this.client.deleteUser(this.userId).subscribe(result => {
+      this.location.back()
+    }, error => console.error(error));
   }
 }
