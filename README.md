@@ -5,4 +5,5 @@ Initial project was created using the Clean Architecture Template
 
 # See: 
 https://github.com/jasontaylordev/CleanArchitecture
+
 https://www.nuget.org/packages/Clean.Architecture.Solution.Template
